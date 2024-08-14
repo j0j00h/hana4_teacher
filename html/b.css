@@ -5,3 +5,7 @@
 .regist-form .row {
   margin-bottom: 1rem;
 }
+
+.regist-form input {
+  text-align: center;
+}
