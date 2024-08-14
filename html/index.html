@@ -5,6 +5,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>First HTML Page</title>
+  <style>
+    ul.checkgroup>li {
+      cursor: pointer;
+    }
+  </style>
 </head>
 
 <body>
@@ -16,9 +21,17 @@
     <form action="a.html">
       <fieldset>
         <legend>CheckBox</legend>
-        <ul>
-          <li><input type="checkbox" value="blue">Blue Team</li>
-          <li><input type="checkbox" value="red">Red Team</li>
+        <ul style="list-style: none;" class="checkgroup">
+          <li>
+            <label>
+              <input type="checkbox" value="blue"> Blue Team
+            </label>
+          </li>
+          <li>
+            <label>
+              <input type="checkbox" value="red"> Red Team
+            </label>
+          </li>
         </ul>
       </fieldset>
     </form>
