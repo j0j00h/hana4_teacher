@@ -6,8 +6,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>First HTML Page</title>
   <style>
-    ul.checkgroup label {
+    ul {
+      list-style: none;
+    }
+
+    #hhh {
+      color: greenyellow;
+    }
+
+    ul label {
       cursor: pointer;
+      font-weight: 700;
     }
   </style>
 </head>
@@ -15,13 +24,35 @@
 <body>
   <div class="container">
     <header class="header">
-      <h1>Header</h1>
+      <h1 id="hhh">Header</h1>
     </header>
 
     <form action="a.html">
       <fieldset>
+        <legend>Select Box</legend>
+        <select name="sel" id="sel">
+          <option value="111">111x</option>
+          <option value="222">222x</option>
+          <option value="333">333x</option>
+        </select>
+
+        <input type="text" id="captain" list="member">
+        <datalist id="member">
+          <option value="111">111x</option>
+          <option value="222">222x</option>
+          <option value="333">333x</option>
+        </datalist>
+
+        <input type="search">
+        <input type="number">
+
+        <label><progress value="50" max="100" />진행률</label>
+        <meter value="0.6" min="0.2" max="0.9" optimum="0.8" />
+      </fieldset>
+
+      <fieldset>
         <legend>CheckBox</legend>
-        <ul style="list-style: none;" class="checkgroup">
+        <ul class="checkgroup">
           <li>
             <label>
               <input type="checkbox" value="blue"> Blue Team
@@ -32,6 +63,14 @@
               <input type="checkbox" value="red"> Red Team
             </label>
           </li>
+        </ul>
+      </fieldset>
+
+      <fieldset>
+        <legend>Radio</legend>
+        <ul>
+          <li><label><input type="radio" name="team">블루팀</label></li>
+          <li><label><input type="radio" name="team">레드팀</label></li>
         </ul>
       </fieldset>
     </form>
