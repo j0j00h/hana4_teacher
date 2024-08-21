@@ -3,10 +3,16 @@ for (let i = 1; i <= 100; i += 1) {
   sum = sum + i;
   if (sum > 1000) break;
 }
+
 console.log('🚀 for1 - sum:', sum);
 sum = 0;
-for (let i = 0; i < 100; sum = sum + (i += 1)) {}
+for (let i = 0; i < 100; sum = sum + (i += 1));
 console.log('🚀 for2 - sum:', sum);
+
+sum = 0;
+for (let i = 0; i <= 5; console.log('after', i++)) {
+  console.log('inner block');
+}
 
 sum = 0;
 let i = 1;
