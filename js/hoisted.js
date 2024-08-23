@@ -48,4 +48,5 @@ if (gg > 0) {
 }
 f1(1, 2);
 console.log('kkkkk>>', kk);
+
 f2('* third');
