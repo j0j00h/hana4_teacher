@@ -68,3 +68,60 @@ for (let i = 1; i <= 100; i += 1) {
   sum += i;
 }
 console.log('🚀  sum:', sum);
+
+function addTo100(a) {
+  if (a === 100) return 100;
+  return a + addTo100(a + 1);
+  //     1 +   2  + 3 + ....
+}
+console.log(addTo100(1));
+
+function addTo100TCO(a, sum = 0) {
+  if (a === 100) return sum + 100;
+  // const c = a + 1;
+  // const d = sum + a;
+  // return addTo100TCO(c, d);
+  return addTo100TCO(a + 1, sum + a);
+}
+console.log('🚀  addTo100TCO:', addTo100TCO(1));
+
+console.log('========================');
+
+console.log('makeArray=', makeArray(10));
+// ⇒ [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+
+function makeArray(n) {
+  if (n === 1) return [1];
+  return [...makeArray(n - 1), n];
+}
+
+function makeReverseArray(n) {
+  if (n === 1) return [1];
+  return [n, ...makeReverseArray(n - 1)];
+  //     [5, ...makeReverseArray(4)]
+  //             [4, ...makeReverseArray(3)]
+  //               [3, ...makeReverseArray(2)]
+  //                [2, ...makeReverseArray(1)]
+  //                 [2, ...[1]]
+}
+console.log('🚀  makeReverseArray:', makeReverseArray(5)); // ⇒ [5, 4, 3, 2, 1]
+
+// n    i-acc         o-acc
+// 5    []           [5, ...acc]
+// 4    [5]          [4, ...acc]]  ==> [4, 5]
+// 3    [4,5]        [3, 4, 5]
+// 2    [3, 4, 5]    [2, 3, 4, 5]
+// 1    [2, 3, 4, 5]
+function makeArrayTCO1(n, acc = []) {
+  if (n === 1) return [1, ...acc];
+
+  return makeArrayTCO1(n - 1, [n, ...acc]);
+}
+console.log('🚀  makeArrayTCO1:', makeArrayTCO1(5));
+function makeArrayTCO2(n, acc = []) {
+  const t = [n, ...acc];
+  if (n === 1) return t;
+
+  return makeArrayTCO2(n - 1, t);
+}
+console.log('🚀  makeArrayTCO2:', makeArrayTCO2(5));
