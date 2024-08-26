@@ -61,3 +61,10 @@ for (const action of actions) {
   console.log(`${action} -> 현재 입장객:  ${counter.count} 명`);
 }
 console.log('Current User Count=', counter.count, counter.getCount()); // counter.getCount()
+
+console.log('==========================');
+let sum = 0;
+for (let i = 1; i <= 100; i += 1) {
+  sum += i;
+}
+console.log('🚀  sum:', sum);
