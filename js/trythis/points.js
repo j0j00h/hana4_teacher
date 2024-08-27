@@ -1,6 +1,6 @@
 const WEEK_NAMES = [...'일월화수목금토'];
 
-ex2();
+ex4();
 
 function ex4() {
   function pointLength(f) {
@@ -89,7 +89,3 @@ function ex1() {
     console.log(+i.toFixed(1));
   }
 }
-
-const uu = { id: 1, name: 'xxx' };
-let id, name;
-{ id, name } = uu;
