@@ -46,17 +46,23 @@ const obj = {
 // ⇔ function declareFn(name) {
 const expressFn = function(name) {
   // if, 'use strict' ?
+  console.log('11>>', this, new.target, this.name, name);
   this.name = name;
-  console.log(this, new.target, this.name, name);
+  console.log('22>>', this, new.target, this.name, name);
 }
 
 const arrowFn = (name) => {
+  console.log('11>>', this, new.target, this.name, name);
   this.name = name;
-  console.log(this, new.target, this.name, name);
+  console.log('22>>', this, new.target, this.name, name);
 }
 
-// expressFn('expfn');
-// arrowFn('afn');
+const hong = {id: 1, name: 'Hong'};
+const kim = { id: 2, name: 'Kim' };
+
+expressFn.bind(hong)('expfn');
+arrowFn.call(kim, 'afn');
+arrowFn.apply(kim, ['afn']);
 
 // const dfn = new expressFn('D');
 // console.log('🚀  dfn.name:', dfn.name)
@@ -105,3 +111,16 @@ const Cat = (name) => {
 // cat.bark2(); // ?
 // Cat.bark(); // ?
 // console.log('type=', typeof cat); // ? 
+
+globalThis.name = 'Global Name';
+
+const obj2= {
+  name: 'Obj Name',
+  printName() {
+    console.log(this.name);
+  },
+};
+
+const printName = obj2.printName;
+// obj.printName(); // printName.bind(obj)();
+printName();
