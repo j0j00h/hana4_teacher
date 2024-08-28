@@ -1,5 +1,6 @@
 globalThis.name = 'GlobalName';
 this.name = 'ModuleName';
+this.module_age = 33;
 
 //
 function tf() {
@@ -23,9 +24,9 @@ const obj = {
     }, 1000);
   },
   bark3() {
-    // ⇐⇒ bark3: function() {
+    const xxx = 'XXX';
     function innerFn() {
-      console.log(this); // ?
+      console.log('33=', this.name, xxx); // ?
     }
     innerFn();
   },
@@ -39,5 +40,68 @@ const obj = {
 // obj.bark3();
 // obj.bark4();
 
-const fff = obj.bark1;
-fff();
+// const fff = obj.bark1;
+// fff();
+
+// ⇔ function declareFn(name) {
+const expressFn = function(name) {
+  // if, 'use strict' ?
+  this.name = name;
+  console.log(this, new.target, this.name, name);
+}
+
+const arrowFn = (name) => {
+  this.name = name;
+  console.log(this, new.target, this.name, name);
+}
+
+// expressFn('expfn');
+// arrowFn('afn');
+
+// const dfn = new expressFn('D');
+// console.log('🚀  dfn.name:', dfn.name)
+// const afn = new arrowFn('A'); // error!
+
+const Dog = function (name) {
+  // if (!new.target) throw new Error('Call constructor!!');
+  console.log(this, new.target, 
+              this instanceof Dog);
+  this.name = name;
+  this.bark = function () {
+    console.log('bark=', new.target, this.name, name);
+  };
+  this.bark2 = () => {
+    this.name = 'XXX'
+    console.log('bark2=', new.target, this.name, name);
+  }
+}
+
+// const dog = Dog('Doggy');
+// const lucy = new Dog('Lucy');
+// console.log('---------------------')
+// Dog.bark(); // ?
+// lucy.bark(); // ?
+// lucy.bark2(); // ?
+// console.log('typeof dog =', typeof dog); // ?
+// console.log('typeof lucy =', typeof lucy); // ?
+
+console.log('---------------------');
+const Cat = (name) => {
+  console.log('Cat>>', this, new.target);
+  this.name = name;
+  this.bark = function () {
+    console.log('bark=', new.target, this.name, name);
+  };
+  this.bark2 = () =>
+    console.log('bark2=', new.target, this.name, name);
+
+  return this;
+}
+
+// const cat = Cat('Coco');
+// const cat = new Cat(''); // error!!
+// console.log('🚀  cat:', cat)
+// cat.bark(); // ?
+// cat.bark2(); // ?
+// Cat.bark(); // ?
+// console.log('type=', typeof cat); // ? 
