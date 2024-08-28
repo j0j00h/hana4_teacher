@@ -44,3 +44,13 @@ const obj = {
 // console.log('------------');
 // obj.subObj.f();
 // obj.subObj.af();
+var i;
+for (i = 0; i < 5; i += 1) {
+  // setTimeout(() => console.log(i), 100); // (다)
+  setTimeout(console.log, 100, i); // (나)
+}
+for (let i = 0; i < 5; i += 1) {
+  setTimeout(() => console.log(i), 100); // (다)
+  // setTimeout(console.log, 100, i); // (나)
+  // ⇐⇒ setTimeout((i) => console.log(i), 100);
+}
