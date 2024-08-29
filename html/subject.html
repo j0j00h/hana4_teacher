@@ -48,13 +48,15 @@
 
     // test code
     let runCnt = 0;
+    const subjects = ['Kor', 'Math'];
     const intl = setInterval(() => {
       runCnt += 1;
       if (runCnt > 20) clearInterval(intl);
-      if (runCnt % 2 === 0)
-        document.getElementById('btnKor').click();
-      else
-        document.getElementById('btnMath').click();
+      document.getElementById(`btn${subjects[runCnt % 2]}`).click();
+      // if (runCnt % 2 === 0)
+      //   document.getElementById('btnKor').click();
+      // else
+      //   document.getElementById('btnMath').click();
     }, 200);
   </script>
 </body>
