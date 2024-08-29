@@ -6,6 +6,7 @@ const lee = { id: 3, name: 'Lee' };
 const park = { id: 4, name: 'Parki' };
 
 const users = [hong, kim, lee, park];
+
 const idxKim = users.indexOf(kim);
 console.log('🚀  idxKim:', idxKim);
 
