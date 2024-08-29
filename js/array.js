@@ -1,3 +1,4 @@
+const assert = require('assert');
 
 const hong = { id: 1, name: 'Hongi' };
 const kim = { id: 2, name: 'Kim' };
@@ -42,9 +43,40 @@ console.log('🚀  hasIUsers:', hasIUsers);
 const names = users.map(user => user.name);
 console.log('🚀  names:', names);
 
-// check prime number
-// 1) 소수를 가지고 있는지
-const hasPrime = (arr) => 
+console.log('=====================');
+const makeArray = (cnt, startNum = 1) =>
+  Array.from({ length: cnt }, (_, i) => i + startNum);
 
-// 2) 소수를 가지고 있다면, 추출
-const getPrimeNumbers = arr => 
+function isPrimeNormal(n) {
+  if (n === 1) return false;
+  for (let i = 2; i <= Math.sqrt(n); i += 1) {
+    if (n % i === 0) return false;
+  }
+  return true;
+}
+
+const isPrime = n => {
+  if (n === 1) return false;
+  // return Array.from({ length: Math.sqrt(n) - 1 }, (_, i) => i + 2).every(
+  return makeArray(Math.sqrt(n) - 1, 2).every(a => n % a !== 0);
+};
+
+// console.log(arr.map(a => [a, isPrime(a)]));
+
+const hasPrime = arr => arr.some(isPrime);
+
+assert.strictEqual(hasPrime([1, 2, 3]), true);
+
+const primeNumbers = arr => arr.filter(isPrime);
+
+assert.deepStrictEqual(primeNumbers(arr), [2, 3, 5]);
+
+const arr100 = makeArray(100);
+console.log('🚀  arr100:', arr100);
+assert.deepStrictEqual(
+  primeNumbers(arr100),
+  [
+    2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71,
+    73, 79, 83, 89, 97,
+  ]
+);
