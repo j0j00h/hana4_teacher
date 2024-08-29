@@ -1,5 +1,3 @@
-const { parseArgs } = require('util');
-
 const hong = { id: 1, name: 'Hong' };
 const kim = { id: 2, name: 'Kim' };
 const lee = { id: 3, name: 'Lee' };
