@@ -15,4 +15,6 @@ console.log('🚀  idxId2:', idxId2);
 const idxId1 = users.findLastIndex(find3);
 console.log('🚀  idxId1:', idxId1);
 
-const findId = 
+const findId = id => a => a.id === id;
+const idxId11 = users.findLastIndex(findId(1));
+console.log('🚀  idxId11:', idxId11);
