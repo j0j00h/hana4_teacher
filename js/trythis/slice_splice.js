@@ -26,10 +26,19 @@ const ex6 = arr2.splice(2, 0, ...ex5);
 console.log('🚀  ex6:', ex6, arr2);
 
 // ex7) [1, 2, 'X', 'Y', 'Z', 4, 5] 만들기
+// - 방법1) 3부터 모두 지우고 'X', 'Y', 'Z', 4, 5 추가
 // const ex7 = arr2.splice(2, Infinity, 'X', 'Y', 'Z', 4, 5);
-const ex7 = arr2.splice(2, arr2.length, 'X', 'Y', 'Z', 4, 5);
+let ex7 = arr2.splice(2, arr2.length, 'X', 'Y', 'Z', 4, 5);
+console.log('🚀  ex7:', ex7, arr2);
+// - 방법2) 3만 지우고 'X', 'Y', 'Z' 추가
+arr2.splice(2, Infinity, ...ex7);
+arr2.splice(2, 1, 'X', 'Y', 'Z');
 console.log('🚀  ex7:', ex7, arr2);
 
 // ex8) 위 7번 문제를 splice를 사용하지 말고 작성하시오.
 const ex8 = arr2.splice(2, Infinity, ...ex7);
 console.log('🚀  ex8:', ex8, arr2);
+// - 1)
+console.log('------------');
+console.log([...arr2.slice(0, 2), 'X', 'Y', 'Z', 4, 5]);
+console.log([...arr2.slice(0, 2), 'X', 'Y', 'Z', ...arr2.slice(-2)]);

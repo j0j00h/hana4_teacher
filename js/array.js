@@ -81,3 +81,9 @@ assert.deepStrictEqual(
     73, 79, 83, 89, 97,
   ]
 );
+
+console.log('********************');
+const objs = [{ id: 1 }, { name: 'Hong' }, { addr: 'Seoul', id: 5 }];
+const obj = objs.reduce((acc, o) => ({ ...acc, ...o }));
+console.log('🚀  obj:', obj);
+assert.deepStrictEqual(obj, { id: 5, name: 'Hong', addr: 'Seoul' });
