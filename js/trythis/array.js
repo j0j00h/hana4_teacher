@@ -123,5 +123,62 @@ const classNames = (...args) =>
 // .replaceAll('  ', ' ');
 
 const ret2 = classNames('', ' a  b    c ', ' d', ' ', 'e'); // cf. clsx
-console.log('🚀  ret2:', ret2);
+// console.log('🚀  ret2:', ret2);
 assert.strictEqual(ret2, 'a b c d e');
+
+// --------------
+const reduce = (arr, fn, initValue) => {
+  if (!arr || !Array.isArray(arr)) return [];
+
+  let i = 0;
+  let acc = initValue ?? ((i = 1), arr[0]);
+  // if (!initValue) {
+  //   acc = arr[0];
+  //   i = 1;
+  // }
+
+  for (; i < arr.length; i++) {
+    acc = fn(acc, arr[i]);
+  }
+
+  return acc;
+};
+
+const r1 = reduce([1, 2, 3], (a, b) => a + b, 0); // 6이면 통과!
+const r2 = reduce([1, 2, 3], (a, b) => a + b); // 6이면 통과!
+// console.log('🚀  r:', r1, r2);
+// cf. [1,2,3].reduce((a,b) => a + b, 0);       // 6
+reduce([1, 2, 3, 4, 5], (a, b) => a + b); // 15면 통과!
+reduce([1, 2, 3, 4, 5], (a, b) => a * b, 1); // 120이면 통과!
+reduce([2, 2, 2], (a, b) => a * b); // 8이면 통과!
+reduce([3, 3, 3], (a, b) => a * b, 0); // 0이면 통과!
+reduce(users, (acc, user) => acc + user.name); // [object Object]LeePark
+
+const a10 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+assert.deepStrictEqual(
+  reduce(a10, (acc, cur) => acc + cur, 0),
+  a10.reduce((acc, cur) => acc + cur, 0)
+);
+
+assert.deepStrictEqual(
+  reduce(users, (acc, user) => acc + user.name),
+  users.reduce((acc, user) => acc + user.name)
+);
+
+// ----------------------------
+const square = a => a ** 2;
+const sqrt = a => Math.sqrt(a);
+const cube = a => a ** 3;
+
+arr = [1, 2, 3, 4, 5];
+const r5 = arr.map(square).map(sqrt).map(cube);
+console.log('🚀  r5:', r5);
+
+const baseJobs = [square, sqrt, cube];
+const r6 = arr.map(a => baseJobs.reduce((acc, job) => job(acc), a));
+console.log('🚀  r6:', r6);
+
+const aJobs = [square, sqrt, cube];
+const bJobs = [cube, square, sqrt];
+
+const robot = (arr, jobs) => {};
