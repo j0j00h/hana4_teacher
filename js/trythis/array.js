@@ -126,7 +126,7 @@ const ret2 = classNames('', ' a  b    c ', ' d', ' ', 'e'); // cf. clsx
 // console.log('🚀  ret2:', ret2);
 assert.strictEqual(ret2, 'a b c d e');
 
-// --------------
+// ------------------------------------
 const reduce = (arr, fn, initValue) => {
   if (!arr || !Array.isArray(arr)) return [];
 
@@ -172,16 +172,53 @@ const cube = a => a ** 3;
 
 arr = [1, 2, 3, 4, 5];
 const r5 = arr.map(square).map(sqrt).map(cube);
-console.log('🚀  r5:', r5);
+// console.log('🚀  r5:', r5);
 
 const baseJobs = [square, sqrt, cube];
 const r6 = arr.map(a => baseJobs.reduce((acc, job) => job(acc), a));
-console.log('🚀  r6:', r6);
+// console.log('🚀  r6:', r6);
 
 const aJobs = [square, sqrt, cube];
 const bJobs = [cube, square];
 
-const robot = (arr, jobs) => ;
+const robot = (arr, jobs) =>
+  arr.map(a => jobs.reduce((acc, job) => job(acc), a));
 
 assert.deepStrictEqual(robot(arr, aJobs), [1, 8, 27, 64, 125]);
 assert.deepStrictEqual(robot(arr, bJobs), [1, 64, 729, 4096, 15625]);
+
+// --------------------------------
+// O(n^2)
+// i: 1, 3, 4, 5
+// j: 1, 3, 4, 5
+const keyPairN2 = (arr, n) => {
+  for (let i = 0; i < arr.length; i += 1) {
+    for (let j = 0; j < arr.length; j++) {
+      if (arr[i] + arr[j] === n) return [i, j];
+    }
+  }
+};
+
+const keyPair = (arr, n) => {
+  // {짝이되는값: 짝의index}
+  const cache = {};
+
+  for (let i = 0; i < arr.length; i += 1) {
+    const val = arr[i];
+    if (val in cache) return [cache[val], i];
+    cache[n - val] = i;
+  }
+};
+// const k1 = keyPair([1, 6, 3, 4, 5], 7); // [1, 2]
+const k1 = keyPair([1, 3, 4, 5], 7); // [1, 2]
+// console.log('🚀  k1:', k1);
+keyPair([1, 4, 45, 6, 10, 8], 16); // [3, 4]
+keyPair([1, 2, 4, 3, 6], 10); // [2, 4]
+keyPair([1, 2, 3, 4, 5, 7], 9); // [3, 4]  or [1, 5]
+// cf. O(n^2) ⇒ ⇒ ⇒ O(N) || O(logN)
+assert.deepStrictEqual(keyPair([1, 3, 4, 5], 7), [1, 2]);
+assert.deepStrictEqual(keyPair([1, 4, 45, 6, 10, 8], 16), [3, 4]);
+assert.deepStrictEqual(keyPair([1, 2, 4, 3, 6], 10), [2, 4]);
+assert.deepStrictEqual(keyPair([1, 2, 3, 4, 5, 7], 9), [3, 4]);
+
+// ------------------------------------
