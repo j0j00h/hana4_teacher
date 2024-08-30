@@ -179,6 +179,9 @@ const r6 = arr.map(a => baseJobs.reduce((acc, job) => job(acc), a));
 console.log('🚀  r6:', r6);
 
 const aJobs = [square, sqrt, cube];
-const bJobs = [cube, square, sqrt];
+const bJobs = [cube, square];
 
-const robot = (arr, jobs) => {};
+const robot = (arr, jobs) => ;
+
+assert.deepStrictEqual(robot(arr, aJobs), [1, 8, 27, 64, 125]);
+assert.deepStrictEqual(robot(arr, bJobs), [1, 64, 729, 4096, 15625]);
