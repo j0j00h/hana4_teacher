@@ -70,7 +70,7 @@ class Queue {
   // 3) new Stack([[1, 2, 3]]) ==> [ [ [1,2,3] ] ]
   constructor(...args) {
     // this.arr = Array.isArray(args[0]) ? [...args] : args; // Bad
-    this.#arr = [...args];
+    this.#arr = [...args.reverse()];
   }
 
   // 1) push(1) <-- arguments.length === 1
