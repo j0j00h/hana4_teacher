@@ -26,15 +26,15 @@ class Collection {
   }
 
   get peek() {
-    return this.#arr.at(-1);
+    return this.#isQueue() ? this.#arr[0] : this.#arr.at(-1);
   }
 
   get poll() {
-    return this.#arr[0];
+    return this.#isQueue() ? this.#arr.shift() : this.#arr.pop();
   }
 
   remove() {
-    return this.#arr.pop();
+    return this.poll;
   }
 
   get length() {
@@ -102,9 +102,10 @@ stack2.push(4, 5); // 추가하기
 assert.deepStrictEqual(stack2.toArray(), [1, 2, 2, 4, 5]);
 
 assert.strictEqual(stack2.peek, 5);
-assert.strictEqual(stack2.poll, 1);
-assert.strictEqual(stack2.remove(), 5);
+assert.strictEqual(stack2.poll, 5);
 assert.deepStrictEqual(stack2.toArray(), [1, 2, 2, 4]);
+assert.strictEqual(stack2.remove(), 4);
+assert.deepStrictEqual(stack2.toArray(), [1, 2, 2]);
 
 stack2.arr = [5, 6, 7]; //error
 assert.notDeepStrictEqual(stack2.toArray(), [5, 6, 7]);
@@ -128,10 +129,10 @@ queue.enqueue(5, 6); // 추가하기
 assert.deepStrictEqual(queue.toArray(), [6, 5, 2]);
 queue.print();
 
-assert.strictEqual(queue.peek, 6);
-assert.strictEqual(queue.poll, 2);
-assert.strictEqual(queue.remove(), 6);
-assert.deepStrictEqual(queue.toArray(), [5, 2]);
+assert.strictEqual(queue.peek, 2); // [6, 5, 2] ==>
+assert.strictEqual(queue.poll, 2); // [6, 5]
+assert.strictEqual(queue.remove(), 5); // [6]
+assert.deepStrictEqual(queue.toArray(), [6]);
 
 queue.clear();
 assert.deepStrictEqual(queue.toArray(), []);
