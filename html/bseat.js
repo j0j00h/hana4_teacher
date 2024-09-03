@@ -50,5 +50,5 @@ function start() {
   const intl = setInterval(() => {
     set(students[idx++]);
     if (idx >= students.length) clearInterval(intl);
-  }, 500);
+  }, 700);
 }
