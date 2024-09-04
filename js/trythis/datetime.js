@@ -32,4 +32,20 @@ function ex2() {
 
   return randDates.sort((a, b) => (a > b ? 1 : -1));
 }
-console.log(ex2());
+const ret2 = ex2();
+console.log(ret2);
+let prev = ret2[0];
+for (let i = 1; i < ret2.length; i++) {
+  assert.equal(prev < ret2[i], true);
+  prev = ret2[i];
+}
+
+const nextYear = new Date();
+nextYear.setFullYear(nextYear.getFullYear() + 1);
+const nextYearWeek = '일월화수목금토'[nextYear.getDay()];
+console.log('🚀  nextYearWeek:', nextYearWeek);
+
+const after100 = new Date();
+console.log('🚀  after100:', after100);
+after100.setDate(after100.getDate() + 100);
+console.log('🚀  after100:', after100.toLocaleDateString());
