@@ -6,7 +6,7 @@ const 가 = '가'.charCodeAt();
 const 힣 = '힣'.charCodeAt();
 const 자음알파벳숫자 = [...'LMNRlmnr136780'].map(a => a.charCodeAt());
 
-export default function isEndJaum(str) {
+export function isEndJaum(str) {
   const s = str.charCodeAt(str.length - 1);
   return (
     (s >= ㄱ && s <= ㅎ) ||
@@ -39,4 +39,4 @@ function testing() {
 }
 // testing();
 
-export { josa, eunun, eulul, eyuya, rang };
+export { iga, josa, eunun, eulul, eyuya, rang };
