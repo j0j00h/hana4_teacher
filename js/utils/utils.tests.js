@@ -1,5 +1,4 @@
 import assert from 'assert';
-import { deepCopy } from './utils.js';
 
 const KIM = { nid: 3, nm: 'Kim', addr: { city: 'Pusan' }, [Symbol()]: 'sym' };
 
