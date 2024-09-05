@@ -1,5 +1,5 @@
 'use strict';
-const assert = require('assert');
+import assert from 'assert';
 
 let arr = [1, 2, 3, 4];
 const push = (arr, ...args) => [...arr, ...args];

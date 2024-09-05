@@ -1,4 +1,5 @@
-const assert = require('assert');
+// import assert from 'assert';
+import assert from 'assert';
 
 const fmt = ([label, unit], price) =>
   `${label}${price.toLocaleString().padStart(9)}${unit}`;
