@@ -1,6 +1,17 @@
 const afterTime = sec =>
-  new Promise((resolve, reject) => setTimeout(resolve, sec * 1000, sec));
+  new Promise((resolve, reject) => setTimeout(resolve, sec * 500, sec));
 
+const odds = [1, 2, 3].filter(async val => {
+  const r = await afterTime(val);
+  // console.log('filter.r=', r);
+  return r % 2 === 1;
+});
+console.log('odds=', odds);
+
+const rrr = (await Promise.all([1, 2, 3].map(afterTime))).filter(n => n % 2);
+console.log('🚀 --> rrr:', rrr);
+
+// ------------------------------
 const r1 = await afterTime(1);
 console.log('🚀  r1:', r1);
 // afterTime(1).then(r1 => console.log('🚀  r1:', r1));
@@ -34,13 +45,3 @@ const mapResult = [1, 2, 3].map(async val => {
   return r;
 });
 console.log('mapResult=', mapResult);
-
-const odds = [1, 2, 3].filter(async val => {
-  const r = await afterTime(val);
-  console.log('filter.r=', r);
-  return r % 2 === 1;
-});
-console.log('odds=', odds);
-
-const rrr = <이 부분을 작성하세요>;
-console.log('odds=', rrr);
