@@ -3,6 +3,6 @@
   "editor.fontSize": 13,
   "editor.hover.enabled": false,
   "editor.codeLens": false,
-  "js.hover.documentation": false,
-  "js.hover.references": false
+  "javascript.referencesCodeLens.enabled": false,
+  "javascript.inlayHints.enumMemberValues.enabled": false
 }
