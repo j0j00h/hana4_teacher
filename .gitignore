@@ -1,9 +1,10 @@
 *.local
 node_modules
 #/node_modules
+.vscode
 tmp
 .DS_Store
 #./ppp.txt
 ppp.txt
 ttt
-ttt.js
+ttt/ttt.js
