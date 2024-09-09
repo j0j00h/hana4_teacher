@@ -99,20 +99,40 @@ customer = {
 // }
 
 console.log('🚀  customer:', customer);
-const xx: Member | Guest = {
+let xx: Guest | Member = {
   id: 123,
   name: '홍길동',
   age: 26,
   addr: '용산구',
+  // discountRate: 1,
 };
 
 if ('age' in xx) g = xx;
 if ('addr' in xx) m = xx;
 
-if (typeof xx.id === 'string' && 'discountRate' in xx) m = xx;
+if (typeof xx.id === 'number' && 'age' in xx) g = xx;
+if (typeof xx.id === 'string' && 'addr' in xx) m = xx;
+
 xx.id = 100;
 // if (typeof xx.id === 'number') g = xx;
 // if (xx.hasOwnProperty('discountRate') m = xx;
+
+let xxx = {
+  id: 123,
+  name: '홍길동',
+  age: 26,
+  addr: '용산구',
+  discountRate: 1,
+};
+
+// if ('age' in xxx)
+g = xxx;
+if ('addr' in xxx && 'discountRate' in xxx) m = xxx;
+
+if (typeof xxx.id === 'number' && 'age' in xxx) g = xxx;
+if (typeof xxx.id === 'string' && 'addr' in xxx) m = xxx;
+
+// ----------------------------------
 
 let ss: string = 'str';
 let nn: number = 900;
@@ -125,3 +145,16 @@ if (typeof yy === 'string') {
 } else {
   nn = yy;
 }
+
+// ----------------------
+let gildong = Math.random() > 0.5 && 'HongGilDong';
+
+if (gildong) {
+  gildong.toUpperCase(); // string
+} else {
+  gildong; // false | string
+}
+
+let a: string | undefined;
+a = Math.random() > 5 ? 'aa' : undefined;
+a?.slice(1);
