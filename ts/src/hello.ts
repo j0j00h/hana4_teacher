@@ -122,15 +122,18 @@ let xxx = {
   name: '홍길동',
   age: 26,
   addr: '용산구',
-  discountRate: 1,
+  discountRate: 0.1,
 };
 
-// if ('age' in xxx)
+// m = xxx;
+
 g = xxx;
-if ('addr' in xxx && 'discountRate' in xxx) m = xxx;
+if ('age' in xxx) g = xxx;
+else m = xxx;
+console.log(xxx);
 
 if (typeof xxx.id === 'number' && 'age' in xxx) g = xxx;
-if (typeof xxx.id === 'string' && 'addr' in xxx) m = xxx;
+// if (typeof xxx.id === 'string' && 'addr' in xxx) m = xxx;
 
 // ----------------------------------
 
