@@ -24,6 +24,10 @@ function App() {
   const minusCount = () => setCount(count - 1);
 
   const logout = () => setSession({ ...session, loginUser: null });
+  // const logout = () => {
+  //   session.loginUser = null;
+  //   setSession(session);
+  // };
 
   console.log('Apppppp');
 
@@ -37,9 +41,16 @@ function App() {
         minusCount={minusCount}
       />
       <hr />
-      <My session={session} />
+      <pre>{JSON.stringify(session.loginUser)}</pre>
+      <My session={session} logout={logout} />
       <div className='card'>
-        <button onClick={() => setCount((count) => count + 1)}>
+        <button
+          onClick={() => {
+            setCount((count) => count + 1);
+            if (session.loginUser) session.loginUser.name = 'XXX' + count;
+            console.table(session.loginUser);
+          }}
+        >
           App.count is {count}
         </button>
       </div>
