@@ -56,7 +56,7 @@ export default function Hello({
   // const [myState, setMyState] = useState(() => new Date().getTime());
   const [myState, setMyState] = useState(0);
   let v = 1;
-  console.debug('********', v, myState, count);
+  // console.debug('********', v, myState, count);
 
   return (
     <>

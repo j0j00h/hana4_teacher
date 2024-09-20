@@ -1,8 +1,42 @@
-export default function Login() {
+import { FormEvent, useState } from 'react';
+
+export default function Login({ login }: { login: () => void }) {
+  // const [id, setId] = useState(0);
+  // console.log('🚀  id:', id);
+
+  const signIn = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const eles = e.currentTarget.elements;
+    const { id, name } = eles as typeof eles & {
+      id: HTMLInputElement;
+      name: HTMLInputElement;
+    };
+    console.log('$$$', id, name);
+    if (!id.value || !name.value) {
+      alert('Input the id & name!!');
+      id.focus();
+      return;
+    }
+
+    // login(+id.value, name.value);
+  };
+
   return (
-    <form>
-      Name: <input type='text' placeholder='Name...' />
-      Password: <input type='password' placeholder='Password...' />
+    <form onSubmit={signIn}>
+      ID:
+      <input
+        id='id'
+        type='number'
+        placeholder='Name...'
+        // onChange={(e) => setId(+e.currentTarget.value)}
+      />
+      Name:
+      <input
+        id='name'
+        type='text'
+        autoComplete='off'
+        placeholder='Password...'
+      />
       <button>Sign In</button>
     </form>
   );

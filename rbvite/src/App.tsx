@@ -28,9 +28,13 @@ function App() {
   //   session.loginUser = null;
   //   setSession(session);
   // };
-  const login = (id: number, name: string) => setSession;
+  const login = (id: number, name: string) =>
+    setSession({
+      ...session,
+      loginUser: { id, name },
+    });
 
-  console.log('Apppppp');
+  // console.log('Apppppp');
 
   return (
     <>
@@ -42,7 +46,8 @@ function App() {
         minusCount={minusCount}
       />
       <hr />
-      <My session={session} logout={logout} />
+      <pre>{JSON.stringify(session.loginUser)}</pre>
+      <My session={session} logout={logout} login={login} />
       <div className='card'>
         <button
           onClick={() => {
