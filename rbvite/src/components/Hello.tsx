@@ -6,7 +6,7 @@ type TitleProps = {
 };
 
 const Title = ({ text, name }: TitleProps) => {
-  console.log('Titttttttttttttt!!');
+  // console.log('Titttttttttttttt!!');
   return (
     <h1>
       {text} {name}
@@ -15,7 +15,7 @@ const Title = ({ text, name }: TitleProps) => {
 };
 
 const Body = ({ children }: { children: ReactNode }) => {
-  console.log('bodddddddd!!!');
+  // console.log('bodddddddd!!!');
   return (
     <div className='red' style={{ color: 'blue' }}>
       {children}
@@ -23,26 +23,59 @@ const Body = ({ children }: { children: ReactNode }) => {
   );
 };
 
-export default function Hello() {
+// function useState<S>(initValueOrFn) {
+//   const state = {
+//     _state: initValueOrFn,
+//     get state() {
+//       return this._state;
+//     },
+//     setState(x: S) {
+//       this._state = x;
+//       vdom.trigger(this);
+//     }
+//   }
+
+//   return [state.state, state.setState];
+// }
+
+type Props = {
+  name: string;
+  age: number;
+  count: number;
+  plusCount: () => void;
+  minusCount: () => void;
+};
+
+export default function Hello({
+  name,
+  age,
+  count,
+  plusCount,
+  minusCount,
+}: Props) {
+  // const [myState, setMyState] = useState(() => new Date().getTime());
   const [myState, setMyState] = useState(0);
   let v = 1;
-  console.log('********', v, myState);
+  console.debug('********', v, myState, count);
 
   return (
     <>
-      <Title text='Hi~' name='React' />
+      <Title text='Hi~' name={name} />
       <Body>
-        This is Hello Body Component. {v} - {myState}
+        This is Hello Body Component. {v} - {myState} - {age}
       </Body>
       <button
         onClick={() => {
           v++;
           setMyState(myState + 1);
+          plusCount();
           // console.log('v/myState=', v, myState);
         }}
       >
-        Click Here!
+        Hello
       </button>
+      <strong>{count}</strong>
+      <button onClick={() => minusCount()}>Minus</button>
     </>
   );
 }
