@@ -1,4 +1,6 @@
 import { Session } from '../App.tsx';
+import Login from './Login.tsx';
+import Profile from './Profile.tsx';
 
 type Props = {
   session: Session;
@@ -8,8 +10,11 @@ type Props = {
 export default function My({ session, logout }: Props) {
   return (
     <>
-      <h3>{session.loginUser?.name} Logined</h3>
-      <button onClick={logout}>Log Out</button>
+      {session.loginUser ? (
+        <Profile session={session} logout={logout} />
+      ) : (
+        <Login />
+      )}
 
       <ul>
         {session.cart.map(({ id, name, price }) => (
