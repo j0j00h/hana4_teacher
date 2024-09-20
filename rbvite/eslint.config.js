@@ -7,7 +7,7 @@ import tseslint from 'typescript-eslint';
 import react from 'eslint-plugin-react';
 import prettier from 'eslint-plugin-prettier';
 import eslintConfigPrettier from 'eslint-config-prettier';
-// import jsxA11y from 'eslint-plugin-jsx-a11y';
+import jsxA11y from 'eslint-plugin-jsx-a11y';
 
 export default tseslint.config(
   { ignores: ['dist'] },
@@ -23,13 +23,13 @@ export default tseslint.config(
       'react-refresh': reactRefresh,
       react,
       prettier,
-      // 'jsx-a11y': jsxA11y,
+      'jsx-a11y': jsxA11y,
     },
     settings: {
       react: { version: '18.3' }, // React 버전 감지
     },
     rules: {
-      ...js.configs.recommended.rules, // ESLint rules
+      // ...js.configs.recommended.rules, // ESLint rules
       ...react.configs.recommended.rules, // React rules
       ...react.configs['jsx-runtime'].rules, // JSX rules
 
@@ -39,7 +39,7 @@ export default tseslint.config(
         { allowConstantExport: true },
       ],
       'prettier/prettier': 'warn',
-      // 'jsx-a11y/alt-text': 'error',
+      'jsx-a11y/alt-text': 'error',
     },
   },
   eslintConfigPrettier

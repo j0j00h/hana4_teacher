@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import './App.css';
 import Hello from './components/Hello';
 import My from './components/My';
 
@@ -37,7 +36,7 @@ function App() {
   // console.log('Apppppp');
 
   return (
-    <>
+    <div className='mx-auto flex flex-col'>
       <Hello
         name='홍길동'
         age={33}
@@ -59,7 +58,7 @@ function App() {
           App.count is {count}
         </button>
       </div>
-    </>
+    </div>
   );
 }
 

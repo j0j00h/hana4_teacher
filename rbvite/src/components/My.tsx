@@ -5,8 +5,7 @@ import Profile from './Profile.tsx';
 type Props = {
   session: Session;
   logout: () => void;
-  // login: (id: number, name: string) => void;
-  login: () => void;
+  login: (id: number, name: string) => void;
 };
 
 export default function My({ session, logout, login }: Props) {
@@ -18,7 +17,7 @@ export default function My({ session, logout, login }: Props) {
         <Login login={login} />
       )}
 
-      <ul>
+      <ul className='my-3 border'>
         {session.cart.map(({ id, name, price }) => (
           <li key={id}>
             {name} <small>({price.toLocaleString()})</small>

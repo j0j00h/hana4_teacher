@@ -74,7 +74,7 @@ export default function Hello({
       >
         Hello
       </button>
-      <strong>{count}</strong>
+      <strong className='mx-5'>{count}</strong>
       <button onClick={() => minusCount()}>Minus</button>
     </>
   );

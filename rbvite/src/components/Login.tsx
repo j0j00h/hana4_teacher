@@ -1,6 +1,10 @@
-import { FormEvent, useState } from 'react';
+import { FormEvent } from 'react';
 
-export default function Login({ login }: { login: () => void }) {
+export default function Login({
+  login,
+}: {
+  login: (id: number, name: string) => void;
+}) {
   // const [id, setId] = useState(0);
   // console.log('🚀  id:', id);
 
@@ -11,14 +15,14 @@ export default function Login({ login }: { login: () => void }) {
       id: HTMLInputElement;
       name: HTMLInputElement;
     };
-    console.log('$$$', id, name);
+    // console.log('$$$', id, name);
     if (!id.value || !name.value) {
       alert('Input the id & name!!');
       id.focus();
       return;
     }
 
-    // login(+id.value, name.value);
+    login(+id.value, name.value);
   };
 
   return (
@@ -36,6 +40,7 @@ export default function Login({ login }: { login: () => void }) {
         type='text'
         autoComplete='off'
         placeholder='Password...'
+        // onChange={(e) => setName(e.currentTarget.value)}
       />
       <button>Sign In</button>
     </form>
