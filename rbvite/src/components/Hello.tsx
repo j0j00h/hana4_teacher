@@ -8,7 +8,7 @@ type TitleProps = {
 const Title = ({ text, name }: TitleProps) => {
   // console.log('Titttttttttttttt!!');
   return (
-    <h1>
+    <h1 className='text-3xl'>
       {text} {name}
     </h1>
   );
@@ -59,8 +59,8 @@ export default function Hello({
   // console.debug('********', v, myState, count);
 
   return (
-    <>
-      <Title text='Hi~' name={name} />
+    <div className='my-5 border border-slate-300 p-3'>
+      <Title text='Hello~' name={name} />
       <Body>
         This is Hello Body Component. {v} - {myState} - {age}
       </Body>
@@ -71,11 +71,14 @@ export default function Hello({
           plusCount();
           // console.log('v/myState=', v, myState);
         }}
+        className='btn'
       >
         Hello
       </button>
       <strong className='mx-5'>{count}</strong>
-      <button onClick={() => minusCount()}>Minus</button>
-    </>
+      <button onClick={() => minusCount()} className='btn btn-danger'>
+        Minus
+      </button>
+    </div>
   );
 }

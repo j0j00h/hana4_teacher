@@ -36,7 +36,7 @@ function App() {
   // console.log('Apppppp');
 
   return (
-    <div className='mx-auto flex flex-col'>
+    <div className='mt-5 flex flex-col items-center'>
       <Hello
         name='홍길동'
         age={33}
@@ -54,6 +54,7 @@ function App() {
             if (session.loginUser) session.loginUser.name = 'XXX' + count;
             console.table(session.loginUser);
           }}
+          className='btn'
         >
           App.count is {count}
         </button>
