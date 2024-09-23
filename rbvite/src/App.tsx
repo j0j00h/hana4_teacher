@@ -22,12 +22,11 @@ function App() {
 
   const plusCount = () => {
     // setCount((pre) => pre + 1);
-    // setCount((pre) => {
-    //   const newer = pre + 1;
-    //   console.log('🚀  newer:', newer, count);
-    //   // setOtherState...
-    //   return newer;
-    // });
+    setCount((pre) => {
+      const newer = pre + 1;
+      // 여기서 변경된 newer(count)를 사용해야 함!
+      return newer;
+    });
     flushSync(() => setCount((c) => c + 1));
     // setOtherState... ver18.2
     console.log('🚀  count:', count, document.getElementById('cnt')?.innerText);
@@ -47,6 +46,18 @@ function App() {
 
   // console.log('Apppppp');
 
+  const removeCartItem = (toRemoveId: number) => {
+    // patten 1)
+    // session.cart = session.cart.filter(({ id }) => id !== toRemoveId);
+    // setSession({ ...session });
+
+    // patten 2)
+    setSession({
+      ...session,
+      cart: session.cart.filter(({ id }) => id !== toRemoveId),
+    });
+  };
+
   return (
     <div className='mt-5 flex flex-col items-center'>
       <Hello
@@ -58,7 +69,12 @@ function App() {
       />
       <hr />
       <pre>{JSON.stringify(session.loginUser)}</pre>
-      <My session={session} logout={logout} login={login} />
+      <My
+        session={session}
+        logout={logout}
+        login={login}
+        removeCartItem={removeCartItem}
+      />
       <div className='card'>
         <button
           onClick={() => {
