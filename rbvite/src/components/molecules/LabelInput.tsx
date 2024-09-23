@@ -6,7 +6,7 @@ type Props = {
   placehoder?: string;
   onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
   classNames?: string;
-  inputAttrs: InputHTMLAttributes<HTMLInputElement>;
+  inputAttrs?: InputHTMLAttributes<HTMLInputElement>;
 };
 
 export default function LabelInput({
