@@ -1,4 +1,5 @@
 import { Session } from '../App';
+import Button from './atoms/Button';
 
 type Props = {
   session: Session;
@@ -12,6 +13,8 @@ export default function Profile({ session, logout }: Props) {
       <button onClick={logout} className='btn btn-primary'>
         Sign Out
       </button>
+
+      <Button onClick={logout} text='SignOut' />
     </div>
   );
 }

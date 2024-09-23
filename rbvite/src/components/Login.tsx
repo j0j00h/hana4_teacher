@@ -36,18 +36,19 @@ export default function Login({
   // };
 
   return (
-    <form onSubmit={signIn} className='border p-4'>
-      <LabelInput
-        label='ID'
-        type='number'
-        onChange={(e) => setId(+e.currentTarget.value)}
-      />
-      <LabelInput
-        label='Name'
-        type='text'
-        onChange={(e) => setName(e.currentTarget.value)}
-      />
-      {/* <div className='flex'>
+    <>
+      <form onSubmit={signIn} className='border p-4'>
+        <LabelInput
+          label='ID'
+          type='number'
+          onChange={(e) => setId(+e.currentTarget.value)}
+        />
+        <LabelInput
+          label='Name'
+          type='text'
+          onChange={(e) => setName(e.currentTarget.value)}
+        />
+        {/* <div className='flex'>
         <label htmlFor='id' className='w-24'>
           ID:
         </label>
@@ -59,7 +60,7 @@ export default function Login({
           // onChange={(e) => setId(+e.currentTarget.value)}
         />
       </div> */}
-      {/* <div className='flex'>
+        {/* <div className='flex'>
         <label htmlFor='name' className='w-24'>
           Name:
         </label>
@@ -72,12 +73,13 @@ export default function Login({
           // onChange={(e) => setName(e.currentTarget.value)}
         />
       </div> */}
-      {/* <button className='btn btn-success float-end mt-3'>Sign In</button> */}
-      <Button
-        text='Sign In'
-        variant='btn-success'
-        classNames='float-end mt-3'
-      />
-    </form>
+        {/* <button className='btn btn-success float-end mt-3'>Sign In</button> */}
+        <Button
+          text='Sign In'
+          variant='btn-success'
+          classNames='float-end mt-3'
+        />
+      </form>
+    </>
   );
 }

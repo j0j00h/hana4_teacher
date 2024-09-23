@@ -1,4 +1,4 @@
-import { ChangeEvent, useId } from 'react';
+import { ChangeEvent, InputHTMLAttributes, useId } from 'react';
 
 type Props = {
   label: string;
@@ -6,10 +6,12 @@ type Props = {
   placehoder?: string;
   onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
   classNames?: string;
+  inputAttrs: InputHTMLAttributes<HTMLInputElement>;
 };
 
 export default function LabelInput({
   label,
+  inputAttrs,
   type = 'text',
   placehoder = `${label}...`,
   onChange = () => {},
@@ -29,6 +31,7 @@ export default function LabelInput({
         placeholder={placehoder}
         className={`inp ${classNames}`}
         onChange={onChange}
+        {...inputAttrs}
       />
     </div>
   );
