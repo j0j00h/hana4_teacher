@@ -18,7 +18,7 @@ export default function LabelInput({
   classNames = '',
 }: Props) {
   const id = useId();
-  console.log('🚀  id:', id);
+  // console.log('🚀  id:', id);
 
   return (
     <div className='my-3 flex'>
