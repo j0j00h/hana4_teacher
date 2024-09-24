@@ -1,5 +1,6 @@
 import {
   createContext,
+  createRef,
   PropsWithChildren,
   useContext,
   useRef,
@@ -28,6 +29,7 @@ const contextInitValue = {
   },
   removeCartItem: (id: number) => console.log(id),
   addCartItem: (name: string, price: number) => console.log(name, price),
+  loginRef: createRef<LoginHandler>(),
 };
 
 type SessionContextProps = Omit<typeof contextInitValue, 'session'> & {
@@ -38,6 +40,7 @@ const SessionContext = createContext<SessionContextProps>(contextInitValue);
 
 export const SessionProvider = ({ children }: PropsWithChildren) => {
   const [session, setSession] = useState<Session>(SampleSession);
+
   const loginRef = useRef<LoginHandler>(null);
 
   const logout = () => setSession({ ...session, loginUser: null });
@@ -71,9 +74,10 @@ export const SessionProvider = ({ children }: PropsWithChildren) => {
       cart: session.cart.filter(({ id }) => id !== toRemoveId),
     });
   };
+
   return (
     <SessionContext.Provider
-      value={{ session, logout, login, removeCartItem, addCartItem }}
+      value={{ session, logout, login, removeCartItem, addCartItem, loginRef }}
     >
       {children}
     </SessionContext.Provider>
