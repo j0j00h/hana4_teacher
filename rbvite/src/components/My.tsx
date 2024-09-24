@@ -10,9 +10,16 @@ type Props = {
   logout: () => void;
   login: (id: number, name: string) => void;
   removeCartItem: (id: number) => void;
+  addCartItem: (name: string, price: number) => void;
 };
 
-export default function My({ session, logout, login, removeCartItem }: Props) {
+export default function My({
+  session,
+  logout,
+  login,
+  removeCartItem,
+  addCartItem,
+}: Props) {
   const [isEditing, setIsEditing] = useState(false);
   const logoutButtonRef = useRef<HTMLButtonElement>(null);
   const nameRef = useRef<HTMLInputElement>(null);
@@ -30,7 +37,19 @@ export default function My({ session, logout, login, removeCartItem }: Props) {
     e.preventDefault();
     const name = nameRef.current?.value;
     const price = priceRef.current?.value;
-    console.log('🚀  name/price:', name, price);
+    // console.log('🚀  name/price:', name, price);
+    if (!name) {
+      alert('상품명을 입력하세요!');
+      return nameRef.current?.focus();
+    } else if (!price) {
+      alert('금액을 입력하세요!');
+      return priceRef.current?.focus();
+    }
+
+    addCartItem(name, +price);
+    nameRef.current.value = '';
+    priceRef.current.value = '';
+    nameRef.current.focus();
   };
 
   return (
@@ -53,7 +72,7 @@ export default function My({ session, logout, login, removeCartItem }: Props) {
             <li key={id} className='flex justify-between'>
               <strong>
                 {id}. {name}
-                <small className='font-light text-gray-500'>
+                <small className='ml-2 font-light text-gray-500'>
                   {price.toLocaleString()}원
                 </small>
               </strong>

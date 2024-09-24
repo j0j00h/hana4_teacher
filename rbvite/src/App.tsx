@@ -48,6 +48,11 @@ function App() {
 
   // console.log('Apppppp');
 
+  const addCartItem = (name: string, price: number) => {
+    const id = Math.max(...session.cart.map(({ id }) => id), 0) + 1;
+    setSession({ ...session, cart: [...session.cart, { id, name, price }] });
+  };
+
   const removeCartItem = (toRemoveId: number) => {
     // patten 1)
     // session.cart = session.cart.filter(({ id }) => id !== toRemoveId);
@@ -77,6 +82,7 @@ function App() {
         logout={logout}
         login={login}
         removeCartItem={removeCartItem}
+        addCartItem={addCartItem}
       />
       <div className='card'>
         <button
