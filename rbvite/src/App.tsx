@@ -61,7 +61,7 @@ function App() {
   };
 
   return (
-    <div className='mt-5 flex flex-col items-center'>
+    <div className='flex flex-col items-center'>
       <Hello
         name='홍길동'
         age={33}
@@ -71,7 +71,7 @@ function App() {
         ref={myHandleRef}
       />
       <hr />
-      <pre>{JSON.stringify(session.loginUser)}</pre>
+      {/* <pre>{JSON.stringify(session.loginUser)}</pre> */}
       <My
         session={session}
         logout={logout}
