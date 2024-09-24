@@ -1,31 +1,22 @@
 import { FaPlus, FaTrashCan } from 'react-icons/fa6';
-import { Session } from '../App.tsx';
 import Login, { type LoginHandler } from './Login.tsx';
 import Profile from './Profile.tsx';
 import Button from './atoms/Button.tsx';
 import { FormEvent, ForwardedRef, forwardRef, useRef, useState } from 'react';
 import { FaRedo, FaSave } from 'react-icons/fa';
 import { useCounter } from '../hooks/counter-hook.tsx';
-
-type Props = {
-  session: Session;
-  logout: () => void;
-  login: (id: number, name: string) => void;
-  removeCartItem: (id: number) => void;
-  addCartItem: (name: string, price: number) => void;
-};
+import { useSession } from '../hooks/session-context.tsx';
 
 export default forwardRef(function My(
-  { session, logout, login, removeCartItem, addCartItem }: Props,
+  _: unknown,
   ref: ForwardedRef<LoginHandler>
 ) {
+  const { session, login, removeCartItem, addCartItem } = useSession();
   const { plusCount } = useCounter();
   const [isEditing, setIsEditing] = useState(false);
   const logoutButtonRef = useRef<HTMLButtonElement>(null);
   const nameRef = useRef<HTMLInputElement>(null);
   const priceRef = useRef<HTMLInputElement>(null);
-
-  console.log('mmmmmmmmmmmmmmmmy');
 
   const toggleEditing = () => {
     setIsEditing((pre) => !pre);
@@ -61,7 +52,7 @@ export default forwardRef(function My(
     <>
       {session.loginUser ? (
         <div className='flex gap-5'>
-          <Profile session={session} logout={logout} ref={logoutButtonRef} />
+          <Profile ref={logoutButtonRef} />
           <Button onClick={() => logoutButtonRef.current?.focus()}>
             MySignOut
           </Button>
