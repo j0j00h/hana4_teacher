@@ -2,7 +2,7 @@ import { FormEvent, useEffect, useImperativeHandle, useRef } from 'react';
 import Button from './atoms/Button';
 import LabelInput from './molecules/LabelInput';
 import { useSession } from '../hooks/session-context';
-import { useCounter } from '../hooks/counter-hook';
+// import { useCounter } from '../hooks/counter-hook';
 
 export type LoginHandler = {
   focus: (prop: string) => void;
@@ -10,7 +10,7 @@ export type LoginHandler = {
 
 export default function Login() {
   const { login, loginRef } = useSession();
-  const { plusCount, minusCount } = useCounter();
+  // const { plusCount, minusCount } = useCounter();
 
   const idRef = useRef<HTMLInputElement>(null);
   const nameRef = useRef<HTMLInputElement>(null);
