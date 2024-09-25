@@ -42,7 +42,8 @@ export default function Item({ item, toggleAdding }: Props) {
     plusCount();
   };
 
-  const removeItem = (id: number) => {
+  const removeItem = (e: MouseEvent<HTMLButtonElement>, id: number) => {
+    e.stopPropagation();
     if (confirm('Are u sure?')) {
       removeCartItem(id);
     }
@@ -120,7 +121,7 @@ export default function Item({ item, toggleAdding }: Props) {
             </small>
           </strong>
           <button
-            onClick={() => removeItem(id)}
+            onClick={(e) => removeItem(e, id)}
             className='btn btn-danger px-1 py-0'
           >
             <FaTrashCan />
