@@ -30,12 +30,14 @@ export default function Item({ item, toggleAdding }: Props) {
     if (hasDirty && nameRef.current && priceRef.current) {
       nameRef.current.value = name;
       priceRef.current.value = String(price);
+      // setDirty(false);
+      checkDirty();
     }
 
-    setTimeout(() => {
-      if (toggleAdding) toggleAdding();
-      else setIsEditing((pre) => !pre);
-    }, 500);
+    // setTimeout(() => {
+    if (toggleAdding) toggleAdding();
+    else setIsEditing((pre) => !pre);
+    // }, 500);
 
     plusCount();
   };
