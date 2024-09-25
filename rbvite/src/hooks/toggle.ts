@@ -5,5 +5,5 @@ export default function useToggle(defVal: boolean = false) {
 
   const toggle = () => setState((pre) => !pre);
 
-  return [state, toggle];
+  return [state, toggle] as const;
 }
