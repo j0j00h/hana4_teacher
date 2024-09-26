@@ -27,12 +27,12 @@ export default function My() {
   // }, [primitive, isAdding]);
 
   let xxx = 0;
-  useEffect(() => {
-    console.log('*******22');
-    // alert('login plz...');
+  // useEffect(() => {
+  //   console.log('*******22');
+  //   // alert('login plz...');
 
-    return () => console.log('unmount22!!');
-  }, []);
+  //   return () => console.log('unmount22!!');
+  // }, []);
   useTimeout(() => {
     xxx++;
   }, 1000);
@@ -40,13 +40,25 @@ export default function My() {
   useEffect(() => {
     const abortController = new AbortController();
     const { signal } = abortController;
-    fetch('/data/sample.json', { signal })
-      .then((res) => res.json())
-      .then((data) => {
-        console.log('data>>', data);
-      });
 
-    return () => abortController.abort();
+    (async function () {
+      try {
+        const data = await fetch('/data/sample.json', { signal }).then((res) =>
+          res.json()
+        );
+        console.log('My.data>>', data);
+      } catch (error) {
+        console.error('Error>>', error);
+      }
+    })();
+    // fetch('/data/sample.json', { signal })
+    //   .then((res) => res.json())
+    //   .then((data) => {
+    //     console.log('data>>', data);
+    //   })
+    //   .catch((error) => console.error('Error>>', error));
+
+    return () => abortController.abort('Clean-up in My!');
   }, []);
 
   return (

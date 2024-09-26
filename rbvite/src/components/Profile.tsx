@@ -1,11 +1,16 @@
 import { ForwardedRef, forwardRef } from 'react';
 import { useSession } from '../hooks/session-context';
+import { useFetch } from '../hooks/fetch-hook';
 // import Button from './atoms/Button';
 
 const Profile = forwardRef(
   ({ xxx }: { xxx: number }, ref: ForwardedRef<HTMLButtonElement>) => {
     const { session, logout } = useSession();
-    console.log('xxx>>>', xxx);
+    // console.log('xxx>>>', xxx);
+
+    const data = useFetch('/data/sample.json');
+    console.log('🚀  Profile.data:', data);
+
     return (
       <div className='mb-3 border px-5 py-2'>
         <button
