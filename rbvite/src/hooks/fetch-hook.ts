@@ -1,6 +1,12 @@
 import { useEffect, useState } from 'react';
 
-export const useFetch = <T>(url: string, depArr: unknown[] = []) => {
+const cache: Record<string, unknown> = {};
+
+export const useFetch = <T>(
+  url: string,
+  isCache: boolean = false,
+  depArr: unknown[] = []
+) => {
   const [result, setResult] = useState<T>();
 
   useEffect(() => {
@@ -9,10 +15,19 @@ export const useFetch = <T>(url: string, depArr: unknown[] = []) => {
 
     (async function () {
       try {
+        console.log('cache11>>', cache);
+        if (isCache && url in cache) {
+          console.log('cccccccccccccccc');
+          return setResult(cache[url] as T);
+        }
+
         const data = (await fetch(url, { signal }).then((res) =>
           res.json()
         )) as T;
-        console.log('useFetch.data>>', data);
+
+        if (isCache) cache[url] = data;
+        console.log('cache22>>', cache);
+        // console.log('useFetch.data>>', data);
         setResult(data);
       } catch (error) {
         console.error('Error>>', error);
