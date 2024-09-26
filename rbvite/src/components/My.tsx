@@ -6,6 +6,7 @@ import { useEffect, useRef } from 'react';
 import { useSession } from '../hooks/session-context.tsx';
 import Item from './Item.tsx';
 import useToggle from '../hooks/toggle.ts';
+import { useTimeout } from '../hooks/timer-hooks.ts';
 
 export default function My() {
   const { session } = useSession();
@@ -25,18 +26,34 @@ export default function My() {
   //   return () => console.log('unmount11!!');
   // }, [primitive, isAdding]);
 
+  let xxx = 0;
   useEffect(() => {
     console.log('*******22');
     // alert('login plz...');
 
     return () => console.log('unmount22!!');
   }, []);
+  useTimeout(() => {
+    xxx++;
+  }, 1000);
+
+  useEffect(() => {
+    const abortController = new AbortController();
+    const { signal } = abortController;
+    fetch('/data/sample.json', { signal })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log('data>>', data);
+      });
+
+    return () => abortController.abort();
+  }, []);
 
   return (
     <>
       {session.loginUser ? (
         <div className='flex gap-5'>
-          <Profile ref={logoutButtonRef} />
+          <Profile ref={logoutButtonRef} xxx={xxx} />
           <Button onClick={() => logoutButtonRef.current?.focus()}>
             MySignOut
           </Button>
