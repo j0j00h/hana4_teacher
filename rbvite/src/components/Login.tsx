@@ -68,11 +68,9 @@ export default function Login() {
     };
   }, [count, plusCount, minusCount]); // 1
 
-  // useEffect(() => {
-  //   console.log('useeffffffff22');
-
-  //   return minusCount;
-  // }, [minusCount]);
+  useEffect(() => {
+    idRef.current?.focus();
+  }, []);
 
   return (
     <>
