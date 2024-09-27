@@ -9,7 +9,7 @@ function App() {
   return (
     <div className='flex flex-col items-center'>
       <SessionProvider>
-        <Hello age={33} ref={myHandleRef} />
+        <Hello friend={33} ref={myHandleRef} />
         <hr />
         <My />
       </SessionProvider>

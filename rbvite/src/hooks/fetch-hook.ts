@@ -2,12 +2,26 @@ import { useEffect, useState } from 'react';
 
 const cache: Record<string, unknown> = {};
 
+interface ErrorWithMessage {
+  message: string;
+}
+
+const isErrorWithMessage = (error: unknown): error is ErrorWithMessage =>
+  typeof error === 'object' &&
+  error !== null &&
+  'message' in error &&
+  typeof error.message === 'string';
+
+const toErrorWithMessage = (error: unknown) =>
+  isErrorWithMessage(error) ? error : new Error(JSON.stringify(error));
+
 export const useFetch = <T>(
   url: string,
   isCache: boolean = false,
   depArr: unknown[] = []
 ) => {
   const [result, setResult] = useState<T>();
+  const [error, setError] = useState<ErrorWithMessage>();
 
   useEffect(() => {
     const abortController = new AbortController();
@@ -31,6 +45,7 @@ export const useFetch = <T>(
         setResult(data);
       } catch (error) {
         console.error('Error>>', error);
+        setError(toErrorWithMessage(error));
       }
     })();
 
@@ -39,5 +54,5 @@ export const useFetch = <T>(
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, depArr);
 
-  return result;
+  return { data: result, error };
 };
