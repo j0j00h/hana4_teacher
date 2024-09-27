@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react';
 
+const ABORT_REASON = 'My useFetch Clean-up!';
+
 const cache: Record<string, unknown> = {};
 
 interface ErrorWithMessage {
@@ -20,7 +22,9 @@ export const useFetch = <T>(
   isCache: boolean = false,
   depArr: unknown[] = []
 ) => {
+  // console.log('🚀  depArr:', depArr);
   const [result, setResult] = useState<T>();
+  const [isLoading, setLoading] = useState(false);
   const [error, setError] = useState<ErrorWithMessage>();
 
   useEffect(() => {
@@ -29,30 +33,39 @@ export const useFetch = <T>(
 
     (async function () {
       try {
-        console.log('cache11>>', cache);
+        // console.log('cache11>>', cache);
         if (isCache && url in cache) {
-          console.log('cccccccccccccccc');
+          // console.log('cccccccccccccccc');
           return setResult(cache[url] as T);
         }
 
-        const data = (await fetch(url, { signal }).then((res) =>
-          res.json()
-        )) as T;
+        setLoading(true);
+        const data = (await fetch(url, { signal }).then((res) => {
+          if (res.ok) return res.json();
+          throw new Error(`${res.status} ${res.statusText}`);
+        })) as T;
+        // console.log('🚀  data:', data);
+        setResult(data);
+        setError(undefined);
 
         if (isCache) cache[url] = data;
-        console.log('cache22>>', cache);
+        // console.log('cache22>>', cache);
         // console.log('useFetch.data>>', data);
-        setResult(data);
       } catch (error) {
-        console.error('Error>>', error);
-        setError(toErrorWithMessage(error));
+        if (error && String(error) !== ABORT_REASON) {
+          console.error('Error>>', error, String(error));
+          setError(toErrorWithMessage(error));
+        }
+      } finally {
+        setLoading(false);
       }
     })();
 
-    return () => abortController.abort('Clean-up!');
+    return () => abortController.abort(ABORT_REASON);
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, depArr);
 
-  return { data: result, error };
+  // console.log('🚀  result:', result, error);
+  return { data: result, isLoading, error };
 };
