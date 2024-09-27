@@ -72,7 +72,7 @@ export default function My() {
         <Login />
       )}
 
-      {/* <ul className='my-3 w-2/3 border p-3'>
+      <ul className='my-3 w-2/3 border p-3'>
         {session.cart?.length ? (
           session.cart.map((item) => (
             <li key={item.id}>
@@ -94,7 +94,7 @@ export default function My() {
             </Button>
           )}
         </li>
-      </ul> */}
+      </ul>
       <Button onClick={toggleReloadSession}>Reload Session</Button>
     </>
   );
