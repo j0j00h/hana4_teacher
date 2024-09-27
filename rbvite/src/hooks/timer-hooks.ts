@@ -7,11 +7,16 @@ export const useTimeout = <T extends (...args: Parameters<T>) => ReturnType<T>>(
 ) => {
   const cbRef = useRef(cb);
   const argsRef = useRef(args);
+
+  const setup = () => {};
+  const clear = () => {};
+  const reset = () => {};
+
   useEffect(() => {
     const timer = setTimeout(cbRef.current, delay, ...argsRef.current);
 
     return () => clearTimeout(timer);
-  }, [delay]);
+  }, [delay, setup, clear]);
 };
 
 export const useInterval = <
