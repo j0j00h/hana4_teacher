@@ -83,7 +83,7 @@ function Hello({ friend }: Props, ref: ForwardedRef<MyHandler>) {
     error,
   } = useFetch<PlaceUser>(
     `https://jsonplaceholder.typicode.com/users/${friend}`,
-    false,
+    true,
     [friend]
   );
 
@@ -91,7 +91,7 @@ function Hello({ friend }: Props, ref: ForwardedRef<MyHandler>) {
     <div className='my-5 w-2/3 border border-slate-300 p-3 text-center'>
       <Title text='Hello~' name={loginUser?.name} />
       <Body>
-        <h3 className='text-center text-2xl'>myState: {myState}</h3>
+        <h3 className='text-center text-lg'>myState: {myState}</h3>
         {isLoading && (
           <h3 className='flex justify-center'>
             <FaSpinner size={20} className='animate-spin text-slate-500' />
