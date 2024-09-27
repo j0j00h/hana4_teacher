@@ -34,7 +34,7 @@ export default function My() {
   const dcPrice = useMemo(() => totalPrice * 0.1, [totalPrice]);
 
   useLayoutEffect(() => {
-    console.log('$$$$$$$$$$$$$$$$', totalPrice);
+    // console.log('$$$$$$$$$$$$$$$$', totalPrice);
   }, [totalPrice]);
 
   let xxx = 0;
