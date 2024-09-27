@@ -88,7 +88,7 @@ function Hello({ friend }: Props, ref: ForwardedRef<MyHandler>) {
   );
 
   return (
-    <div className='my-5 w-2/3 border border-slate-300 p-3 text-center'>
+    <div className='bg-blackx text-whitex my-5 w-2/3 border border-slate-300 p-3 text-center'>
       <Title text='Hello~' name={loginUser?.name} />
       <Body>
         <h3 className='text-center text-lg'>myState: {myState}</h3>
@@ -104,7 +104,9 @@ function Hello({ friend }: Props, ref: ForwardedRef<MyHandler>) {
               : error.message}
           </strong>
         ) : (
-          <strong>My friend is {friendInfo?.username}.</strong>
+          <div className='flex h-10 items-center justify-center rounded-lg shadow-[0_0_10px_purple]'>
+            My friend is {friendInfo?.username}.
+          </div>
         )}
         <p>
           {v} - {friend}
