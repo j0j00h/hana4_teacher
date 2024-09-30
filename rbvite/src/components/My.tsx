@@ -42,7 +42,7 @@ export default function My() {
   //   [session.cart.length]
   // );
   const ulCbRef = (node: HTMLUListElement) => {
-    console.log('node>>>', node, session.cart.length);
+    // console.log('node>>>', node, session.cart.length);
     setUlHeight(node?.clientHeight);
   };
 
