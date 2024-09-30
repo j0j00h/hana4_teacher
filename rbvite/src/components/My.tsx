@@ -2,7 +2,14 @@ import { FaPlus } from 'react-icons/fa6';
 import Login from './Login.tsx';
 import Profile from './Profile.tsx';
 import Button from './atoms/Button.tsx';
-import { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
+import {
+  useCallback,
+  useEffect,
+  useLayoutEffect,
+  useMemo,
+  useRef,
+  useState,
+} from 'react';
 import { useSession } from '../hooks/session-context.tsx';
 import Item from './Item.tsx';
 import useToggle from '../hooks/toggle.ts';
@@ -28,9 +35,23 @@ export default function My() {
       console.log('useDebounce.search>>', searchRef.current?.value);
       setSearchstr(searchRef.current?.value || '');
     },
-    2000,
+    200,
     [searchRef.current?.value]
   );
+
+  const [ulHeight, setUlHeight] = useState(0);
+
+  // const ulCbRef = useCallback(
+  //   (node: HTMLUListElement) => {
+  //     console.log('node>>>', node, session.cart.length);
+  //     setUlHeight(node?.clientHeight);
+  //   },
+  //   [session.cart.length]
+  // );
+  const ulCbRef = (node: HTMLUListElement) => {
+    console.log('node>>>', node, session.cart.length);
+    setUlHeight(node?.clientHeight);
+  };
 
   // const primitive = 123;
 
@@ -109,7 +130,7 @@ export default function My() {
             className='inp'
           />
         </div>
-        <ul className='mt-3 px-3'>
+        <ul ref={ulCbRef} className='mt-3 px-3'>
           {session.cart?.length ? (
             session.cart
               .filter(({ name }) => name.includes(searchstr))
@@ -139,6 +160,7 @@ export default function My() {
       <div className='mb-3 flex gap-5'>
         <span>*총액: {totalPrice.toLocaleString()}원</span>
         <span>*할인: {dcPrice.toFixed(0).toLocaleString()}원</span>
+        <span>{ulHeight}</span>
       </div>
       <Button onClick={toggleReloadSession}>Reload Session</Button>
     </>
