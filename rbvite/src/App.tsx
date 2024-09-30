@@ -3,20 +3,24 @@ import Hello, { MyHandler } from './components/Hello';
 import My from './components/My';
 import { SessionProvider } from './hooks/session-context';
 import { useDebounce } from './hooks/timer-hooks';
+import useToggle from './hooks/toggle';
 // import { useInterval } from './hooks/timer-hooks';
 // import Button from './components/atoms/Button';
 // import { useCounter } from './hooks/counter-hook';
 
 function App() {
   const [friend, setFriend] = useState(10);
+  const [, toggleReRender] = useToggle();
   const myHandleRef = useRef<MyHandler>(null);
 
+  const friendRef = useRef<HTMLInputElement>(null);
   useDebounce(
     () => {
-      // friends;
+      console.log('useDebounce>>>>>>>', friendRef.current?.value);
+      setFriend(+(friendRef.current?.value || 0));
     },
     1000,
-    [friend]
+    [friendRef.current?.value]
   );
 
   // const { reset, clear } = useInterval(() => depArr((pre) => pre + 1), 1000);
@@ -35,6 +39,8 @@ function App() {
             type='number'
             defaultValue={friend}
             // onChange={(e) => setFriend(+e.currentTarget.value)}
+            onChange={toggleReRender}
+            ref={friendRef}
             placeholder='friend id...'
             className='inp'
           />

@@ -66,7 +66,21 @@ export const useInterval = useTimer.bind({
   clearFn: clearInterval,
 });
 
-export const useDebounce = <
+export const useDebounce = <T extends (...args: unknown[]) => ReturnType<T>>(
+  cb: T,
+  delay: number,
+  depArr: unknown[] = []
+) => {
+  const { reset, clear } = useTimeout(cb, delay);
+
+  useEffect(() => {
+    reset();
+    return clear;
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [...depArr, delay]);
+};
+
+export const useDebounceX = <
   T extends (...args: Parameters<T>) => ReturnType<T>,
 >(
   cb: T,
