@@ -119,7 +119,7 @@ export const SessionProvider = ({ children }: PropsWithChildren) => {
 
     const cart = JSON.parse(localStorage.getItem(SKEY) || '') as CartItem[];
 
-    const savedData = loginUser && cart ? { loginUser, cart } : null;
+    const savedData = loginUser || cart ? { loginUser, cart } : null;
 
     dispatch({
       type: 'intialize',
