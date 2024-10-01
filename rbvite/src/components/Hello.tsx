@@ -99,11 +99,13 @@ function Hello({ friend }: Props, ref: ForwardedRef<MyHandler>) {
   );
 
   return (
-    <div className='bg-blackx text-whitex my-5 w-2/3 border border-slate-300 p-3 text-center'>
-      <Title text='Hello~' name={loginUser?.name} />
-      p: {p}, q: {q}
-      <Button onClick={dispatchP}>PPP</Button>
-      <Button onClick={dispatchQ}>QQQ</Button>
+    <div className='bg-blackx text-whitex my-1 w-2/3 border border-slate-300 p-3 text-center'>
+      <div className='flex justify-around'>
+        <Title text='Hello~' name={loginUser?.name} />
+        p: {p}, q: {q}
+        <Button onClick={dispatchP}>PPP</Button>
+        <Button onClick={dispatchQ}>QQQ</Button>
+      </div>
       <Body>
         <h3 className='text-center text-lg'>myState: {myState}</h3>
         {isLoading ? (

@@ -57,8 +57,10 @@ function App() {
         <Button onClick={clear}>Clear</Button>
       </div> */}
 
-      <MemoedColorTitle color='white' backgroundColor={color} />
-      <Button onClick={changeColor}>ChangeColor</Button>
+      <div className='flex gap-2'>
+        <MemoedColorTitle color='white' backgroundColor={color} />
+        <Button onClick={changeColor}>ChangeColor</Button>
+      </div>
 
       <SessionProvider>
         <div className='mt-3 w-64'>
