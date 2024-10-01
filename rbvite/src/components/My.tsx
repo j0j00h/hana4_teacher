@@ -39,7 +39,7 @@ export default function My() {
 
   useDebounce(
     () => {
-      console.log('useDebounce.search>>', searchRef.current?.value);
+      // console.log('useDebounce.search>>', searchRef.current?.value);
       setSearchstr(searchRef.current?.value || '');
     },
     200,
@@ -69,7 +69,7 @@ export default function My() {
   // }, [primitive, isAdding]);
 
   const totalPrice = useMemo(
-    () => session.cart.reduce((acc, item) => acc + item.price, 0),
+    () => session.cart?.reduce((acc, item) => acc + item.price, 0),
     [session.cart]
   );
 
@@ -165,7 +165,7 @@ export default function My() {
       </div>
 
       <div className='mb-3 flex gap-5'>
-        <span>*총액: {totalPrice.toLocaleString()}원</span>
+        <span>*총액: {totalPrice?.toLocaleString()}원</span>
         <span>*할인: {dcPrice.toFixed(0).toLocaleString()}원</span>
         <span>{ulHeight}</span>
       </div>

@@ -4,6 +4,8 @@ import {
   ReactNode,
   useImperativeHandle,
   useReducer,
+  useState,
+  useTransition,
 } from 'react';
 import { useCounter } from '../hooks/counter-hook';
 import { useSession } from '../hooks/session-context';
@@ -78,6 +80,9 @@ function Hello({ friend }: Props, ref: ForwardedRef<MyHandler>) {
   const [myState, setMyState] = useMyState(0);
   let v = 1;
 
+  const [arr, setArr] = useState<{ id: number }[]>([]);
+  const [isPending, startTransition] = useTransition();
+
   const handler: MyHandler = {
     jumpHelloState: () => setMyState((pre) => pre * 10),
   };
@@ -126,6 +131,13 @@ function Hello({ friend }: Props, ref: ForwardedRef<MyHandler>) {
           setMyState(myState + 1);
           plusCount();
           // console.log('v/myState=', v, myState);
+          startTransition(() => {
+            const newArr = Array.from({ length: 70000 }, (_, i) => ({
+              id: i + myState,
+            }));
+            // console.log('🚀  newArr:', newArr);
+            setArr(newArr);
+          });
         }}
         className='btn'
       >
@@ -137,6 +149,15 @@ function Hello({ friend }: Props, ref: ForwardedRef<MyHandler>) {
       <button onClick={() => minusCount()} className='btn btn-danger'>
         Minus
       </button>
+      {isPending ? (
+        <FaSpinner className='animate-spin' />
+      ) : (
+        <ul>
+          {arr.map((a) => (
+            <li key={a.id}>{a.id}</li>
+          ))}
+        </ul>
+      )}
     </div>
   );
 }
