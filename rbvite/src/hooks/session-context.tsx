@@ -46,6 +46,7 @@ type SessionContextProps = Omit<typeof contextInitValue, 'session'> & {
 };
 
 type Action =
+  | { type: 'intialize'; payload: Session }
   | {
       type: 'login';
       payload: LoginUser;
@@ -56,16 +57,30 @@ type Action =
     }
   | { type: 'addCartItem'; payload: CartItem }
   | { type: 'editCartItem'; payload: CartItem }
-  | { type: 'removeCartItem'; payload: { toRemoveId: number } };
+  | { type: 'removeCartItem'; payload: number };
 
 const reducer = (session: Session, { type, payload }: Action) => {
   switch (type) {
+    case 'intialize':
+      return payload;
     case 'login':
       return { ...session, loginUser: payload };
     case 'logout':
       return { ...session, loginUser: null };
     case 'addCartItem':
       return { ...session, cart: [...session.cart, payload] };
+    case 'removeCartItem':
+      return {
+        ...session,
+        cart: session.cart.filter(({ id }) => id !== payload),
+      };
+    case 'editCartItem':
+      return {
+        ...session,
+        cart: session.cart.map((oldItem) =>
+          oldItem.id === payload.id ? payload : oldItem
+        ),
+      };
     default:
       return session;
   }
@@ -83,12 +98,14 @@ export const SessionProvider = ({ children }: PropsWithChildren) => {
   ]);
   // console.log('🚀  data:', data);
   useLayoutEffect(() => {
-    setSession(data || SampleSession);
+    // setSession(data || SampleSession);
+    dispatch({ type: 'intialize', payload: data || SampleSession });
   }, [data]);
 
   const loginRef = useRef<LoginHandler>(null);
 
-  const logout = () => setSession({ ...session, loginUser: null });
+  // const logout = () => setSession({ ...session, loginUser: null });
+  const logout = () => dispatch({ type: 'logout', payload: null });
 
   const login = (id: number, name: string) => {
     if (!id) {
@@ -117,18 +134,13 @@ export const SessionProvider = ({ children }: PropsWithChildren) => {
   };
 
   const removeCartItem = (toRemoveId: number) => {
-    setSession({
-      ...session,
-      cart: session.cart.filter(({ id }) => id !== toRemoveId),
-    });
+    dispatch({ type: 'removeCartItem', payload: toRemoveId });
   };
 
   const editCartItem = (item: CartItem) => {
-    setSession({
-      ...session,
-      cart: session.cart.map((oldItem) =>
-        oldItem.id === item.id ? item : oldItem
-      ),
+    dispatch({
+      type: 'editCartItem',
+      payload: item,
     });
   };
 
