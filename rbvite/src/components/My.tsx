@@ -181,7 +181,9 @@ export default function My() {
         <span>*할인: {dcPrice.toFixed(0).toLocaleString()}원</span>
         <span>{ulHeight}</span>
       </div>
-      <Button onClick={toggleReloadSession}>Reload Session</Button>
+      <div id='xx'>
+        <Button onClick={toggleReloadSession}>Reload Session</Button>
+      </div>
     </>
   );
 }
