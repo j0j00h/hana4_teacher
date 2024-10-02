@@ -105,7 +105,7 @@ function Hello({ friend }: Props, ref: ForwardedRef<MyHandler>) {
     <div className='bg-blackx text-whitex my-1 w-4/5 border border-slate-300 p-3 text-center'>
       <div className='flex justify-around'>
         <Title text='Hello~' name={loginUser?.name} />
-        <span className={clsx('rounded text-xl', isPStrong && 'text-blue-500')}>
+        <span className={clsx('text-xl', isPStrong && 'text-blue-500')}>
           p: {p}
         </span>
         <span
@@ -123,7 +123,7 @@ function Hello({ friend }: Props, ref: ForwardedRef<MyHandler>) {
         </Button>
         <Button
           onClick={() => {
-            dispatchQ(null);
+            dispatchQ();
             togglePStrong(false);
           }}
         >
