@@ -16,6 +16,7 @@ import useToggle from '../hooks/toggle.ts';
 import { useDebounce, useTimeout } from '../hooks/timer-hooks.ts';
 import { FaSearch } from 'react-icons/fa';
 import styles from './My.module.css';
+import clsx from 'clsx';
 
 export default function My() {
   const { session, toggleReloadSession } = useSession();
@@ -115,19 +116,26 @@ export default function My() {
 
   return (
     <>
-      {session.loginUser ? (
-        <div className='flex gap-5'>
-          <Profile ref={logoutButtonRef} xxx={xxx} />
-          <Button
-            onClick={() => logoutButtonRef.current?.focus()}
-            classNames='h-full'
-          >
-            MySignOut
-          </Button>
-        </div>
-      ) : (
-        <Login />
-      )}
+      <div
+        className={clsx(
+          !session.loginUser && 'border-2 border-red-500',
+          'rounded-md'
+        )}
+      >
+        {session.loginUser ? (
+          <div className='flex gap-5'>
+            <Profile ref={logoutButtonRef} xxx={xxx} />
+            <Button
+              onClick={() => logoutButtonRef.current?.focus()}
+              classNames='h-full'
+            >
+              MySignOut
+            </Button>
+          </div>
+        ) : (
+          <Login />
+        )}
+      </div>
 
       <div className='w-2/3 border p-3'>
         <div className='flex items-center gap-2'>
