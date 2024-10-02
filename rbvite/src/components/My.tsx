@@ -15,6 +15,7 @@ import Item from './Item.tsx';
 import useToggle from '../hooks/toggle.ts';
 import { useDebounce, useTimeout } from '../hooks/timer-hooks.ts';
 import { FaSearch } from 'react-icons/fa';
+import styles from './My.module.css';
 
 export default function My() {
   const { session, toggleReloadSession } = useSession();
@@ -117,7 +118,10 @@ export default function My() {
       {session.loginUser ? (
         <div className='flex gap-5'>
           <Profile ref={logoutButtonRef} xxx={xxx} />
-          <Button onClick={() => logoutButtonRef.current?.focus()}>
+          <Button
+            onClick={() => logoutButtonRef.current?.focus()}
+            classNames='h-full'
+          >
             MySignOut
           </Button>
         </div>
@@ -127,7 +131,7 @@ export default function My() {
 
       <div className='w-2/3 border p-3'>
         <div className='flex items-center gap-2'>
-          <FaSearch />
+          <FaSearch className={`${styles.xx}`} />
           <input
             // onChange={(e) => setSearchstr(e.currentTarget.value)}
             onChange={toggleSearch}

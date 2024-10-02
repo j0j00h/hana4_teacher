@@ -13,6 +13,8 @@ import { useFetch } from '../hooks/fetch-hook';
 import { FaSpinner } from 'react-icons/fa6';
 import { useMyReducer, useMyState } from '../libs/my-uses';
 import Button from './atoms/Button';
+import useToggle from '../hooks/toggle';
+import clsx from 'clsx';
 
 type TitleProps = {
   text: string;
@@ -74,6 +76,7 @@ function Hello({ friend }: Props, ref: ForwardedRef<MyHandler>) {
   } = useSession();
   const { count, plusCount, minusCount } = useCounter();
 
+  const [isPStrong, togglePStrong] = useToggle(false);
   const [p, dispatchP] = useReducer((pre) => pre + 10, 0);
   const [q, dispatchQ] = useMyReducer((pre) => pre + 10, 0);
   // const [myState, setMyState] = useState(0);
@@ -99,12 +102,33 @@ function Hello({ friend }: Props, ref: ForwardedRef<MyHandler>) {
   );
 
   return (
-    <div className='bg-blackx text-whitex my-1 w-2/3 border border-slate-300 p-3 text-center'>
+    <div className='bg-blackx text-whitex my-1 w-4/5 border border-slate-300 p-3 text-center'>
       <div className='flex justify-around'>
         <Title text='Hello~' name={loginUser?.name} />
-        p: {p}, q: {q}
-        <Button onClick={dispatchP}>PPP</Button>
-        <Button onClick={dispatchQ}>QQQ</Button>
+        <span className={clsx('text-xl', isPStrong && 'text-blue-500')}>
+          p: {p}
+        </span>
+        <span
+          className={clsx({ 'text-xl': true, 'text-blue-500': !isPStrong })}
+        >
+          q: {q}
+        </span>
+        <Button
+          onClick={() => {
+            dispatchP();
+            togglePStrong(true);
+          }}
+        >
+          PPP
+        </Button>
+        <Button
+          onClick={() => {
+            dispatchQ(null);
+            togglePStrong(false);
+          }}
+        >
+          QQQ
+        </Button>
       </div>
       <Body>
         <h3 className='text-center text-lg'>myState: {myState}</h3>
