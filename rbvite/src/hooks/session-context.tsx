@@ -117,7 +117,7 @@ export const SessionProvider = ({ children }: PropsWithChildren) => {
       sessionStorage.getItem(SKEY) || 'null'
     ) as LoginUser;
 
-    const cart = JSON.parse(localStorage.getItem(SKEY) || '') as CartItem[];
+    const cart = JSON.parse(localStorage.getItem(SKEY) || 'null') as CartItem[];
 
     const savedData = loginUser || cart ? { loginUser, cart } : null;
 
