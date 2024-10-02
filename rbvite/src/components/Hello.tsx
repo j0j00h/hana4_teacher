@@ -56,7 +56,7 @@ const Body = ({ children }: { children: ReactNode }) => {
 // }
 
 type Props = {
-  friend: number;
+  friend?: number;
 };
 
 export type MyHandler = {
@@ -70,7 +70,7 @@ type PlaceUser = {
   email: string;
 };
 
-function Hello({ friend }: Props, ref: ForwardedRef<MyHandler>) {
+function Hello({ friend = 10 }: Props, ref: ForwardedRef<MyHandler>) {
   // const [myState, setMyState] = useState(() => new Date().getTime());
   const {
     session: { loginUser },
@@ -103,7 +103,7 @@ function Hello({ friend }: Props, ref: ForwardedRef<MyHandler>) {
   );
 
   return (
-    <div className='bg-blackx text-whitex my-1 w-4/5 border border-slate-300 p-3 text-center'>
+    <div className='bg-blackx text-whitex my-1 w-full border border-slate-300 p-3 text-center'>
       <div className='flex justify-around'>
         <Title text='Hello~' name={loginUser?.name} />
         <span className={clsx('text-4xl', isPStrong && 'text-blue-500')}>

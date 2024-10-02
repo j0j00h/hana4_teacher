@@ -5,6 +5,12 @@ import { SessionProvider } from './hooks/session-context';
 import { useDebounce } from './hooks/timer-hooks';
 import useToggle from './hooks/toggle';
 import Button from './components/atoms/Button';
+import Nav from './Nav';
+import { Route, Routes } from 'react-router-dom';
+import Login from './components/Login';
+import { NotFound } from './NotFound';
+import Home from './Home';
+import Items from './components/Items';
 // import { useInterval } from './hooks/timer-hooks';
 // import Button from './components/atoms/Button';
 // import { useCounter } from './hooks/counter-hook';
@@ -57,27 +63,44 @@ function App() {
         <Button onClick={clear}>Clear</Button>
       </div> */}
 
-      <div className='flex gap-2'>
-        <MemoedColorTitle color='white' backgroundColor={color} />
-        <Button onClick={changeColor}>ChangeColor</Button>
-      </div>
-
       <SessionProvider>
-        <div className='mt-3 w-64'>
+        <Nav />
+        <div className='mt-9'>
+          <Routes>
+            <Route path='/' element={<Home />} />
+            <Route path='/login' element={<Login />} />
+            <Route path='/my' element={<My />} />
+            <Route path='/items' element={<Items />} />
+            {/* <Route path='/items/:id' element={<Item />} /> */}
+            <Route path='/hello' element={<Hello ref={myHandleRef} />} />
+            <Route path='*' element={<NotFound />} />
+          </Routes>
+        </div>
+
+        <div className='mt-3 flex w-full items-center justify-center px-5'>
+          <label htmlFor='friendid' className='w-64'>
+            Hello FriendID:
+          </label>
           <input
+            id='friendid'
             type='number'
             defaultValue={friend}
             // onChange={(e) => setFriend(+e.currentTarget.value)}
             onChange={toggleReRender}
             ref={friendRef}
             placeholder='friend id...'
-            className='inp'
+            className='inp ml-3'
           />
         </div>
-        <Hello friend={friend} ref={myHandleRef} />
+        {/* <Hello friend={friend} ref={myHandleRef} />
         <hr />
-        <My />
+        <My /> */}
       </SessionProvider>
+
+      <div className='mt-10 flex gap-2'>
+        <MemoedColorTitle color='white' backgroundColor={color} />
+        <Button onClick={changeColor}>ChangeColor</Button>
+      </div>
 
       {/* <div className='card'>
         <button
