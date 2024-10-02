@@ -6,11 +6,12 @@ import { useDebounce } from './hooks/timer-hooks';
 import useToggle from './hooks/toggle';
 import Button from './components/atoms/Button';
 import Nav from './Nav';
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes, useLocation } from 'react-router-dom';
 import Login from './components/Login';
 import { NotFound } from './NotFound';
 import Home from './Home';
 import Items from './components/Items';
+import ItemDetail from './components/ItemDetail';
 // import { useInterval } from './hooks/timer-hooks';
 // import Button from './components/atoms/Button';
 // import { useCounter } from './hooks/counter-hook';
@@ -55,6 +56,10 @@ function App() {
 
   // const { reset, clear } = useInterval(() => depArr((pre) => pre + 1), 1000);
 
+  const location = useLocation();
+  const { pathname } = location;
+  console.log('🚀  pathname:', pathname);
+
   return (
     <div className='flex flex-col items-center'>
       {/* <h1 className='text-2xl'>F: {friend}</h1>
@@ -65,33 +70,45 @@ function App() {
 
       <SessionProvider>
         <Nav />
-        <div className='mt-9'>
+        <div className='mt-12 w-4/5 text-center'>
           <Routes>
             <Route path='/' element={<Home />} />
             <Route path='/login' element={<Login />} />
             <Route path='/my' element={<My />} />
             <Route path='/items' element={<Items />} />
-            {/* <Route path='/items/:id' element={<Item />} /> */}
-            <Route path='/hello' element={<Hello ref={myHandleRef} />} />
+            <Route path='/items/:id' element={<ItemDetail />} />
+            <Route
+              path='/hello'
+              element={
+                <Hello
+                  friend={+(friendRef.current?.value || 0)}
+                  ref={myHandleRef}
+                />
+              }
+            />
             <Route path='*' element={<NotFound />} />
           </Routes>
         </div>
 
-        <div className='mt-3 flex w-full items-center justify-center px-5'>
-          <label htmlFor='friendid' className='w-64'>
-            Hello FriendID:
-          </label>
-          <input
-            id='friendid'
-            type='number'
-            defaultValue={friend}
-            // onChange={(e) => setFriend(+e.currentTarget.value)}
-            onChange={toggleReRender}
-            ref={friendRef}
-            placeholder='friend id...'
-            className='inp ml-3'
-          />
-        </div>
+        <h1 className='mt-20'>{pathname}</h1>
+        {pathname.startsWith('/hello') && (
+          <div className='mt-3 flex w-full items-center justify-center px-5'>
+            <label htmlFor='friendid' className='w-64'>
+              Hello FriendID:
+            </label>
+            <input
+              id='friendid'
+              type='number'
+              defaultValue={friend}
+              // onChange={(e) => setFriend(+e.currentTarget.value)}
+              onChange={toggleReRender}
+              ref={friendRef}
+              placeholder='friend id...'
+              className='inp ml-3'
+            />
+          </div>
+        )}
+
         {/* <Hello friend={friend} ref={myHandleRef} />
         <hr />
         <My /> */}
