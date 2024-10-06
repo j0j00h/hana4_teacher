@@ -27,7 +27,7 @@ const students = [
   '조서현',
   '천혜민',
   '최강희',
-];
+].reverse();
 const inps = document.getElementsByTagName('input');
 console.log('***********', inps);
 
@@ -48,5 +48,5 @@ function start() {
   const intl = setInterval(() => {
     set(students[idx++]);
     if (idx >= students.length) clearInterval(intl);
-  }, 700);
+  }, 500);
 }
