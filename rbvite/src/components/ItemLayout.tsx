@@ -2,7 +2,6 @@ import { Outlet, useNavigate } from 'react-router-dom';
 import { CartItem, useSession } from '../hooks/session-context';
 import { useState } from 'react';
 import Button from './atoms/Button';
-import { Link } from 'react-router-dom';
 
 export default function ItemLayout() {
   const {
