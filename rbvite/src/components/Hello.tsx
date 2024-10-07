@@ -12,6 +12,7 @@ import { useSession } from '../hooks/session-context';
 import { useFetch } from '../hooks/fetch-hook';
 import { FaSpinner } from 'react-icons/fa6';
 import { useMyReducer, useMyState } from '../libs/my-uses';
+import { useInterval, useTimeout } from '../hooks/timer-hooks';
 import Button from './atoms/Button';
 import useToggle from '../hooks/toggle';
 import clsx from 'clsx';
@@ -102,6 +103,13 @@ function Hello({ friend = 10 }: Props, ref: ForwardedRef<MyHandler>) {
     [friend]
   );
 
+  const { clear } = useInterval(() => console.log('X'), 1000);
+  const { reset } = useTimeout(
+    (name) => console.log(`Hello, ${name}!!!`),
+    3000,
+    ['Hong']
+  );
+
   return (
     <div className='bg-blackx text-whitex my-1 w-full border border-slate-300 p-3 text-center'>
       <div className='flex justify-around'>
@@ -151,6 +159,9 @@ function Hello({ friend = 10 }: Props, ref: ForwardedRef<MyHandler>) {
             My friend is {friendInfo?.id}. {friendInfo?.username}.
           </div>
         )}
+        <Button onClick={reset}>Reset Timeout</Button>
+        <Button onClick={clear}>Clear Interval</Button>
+
         <p>
           {v} - {friend}
         </p>

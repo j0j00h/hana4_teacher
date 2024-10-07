@@ -9,8 +9,7 @@ import Button from './atoms/Button';
 import LabelInput from './molecules/LabelInput';
 import { useSession } from '../hooks/session-context';
 import { useCounter } from '../hooks/counter-hook';
-import { useInterval, useTimeout } from '../hooks/timer-hooks';
-// import { useCounter } from '../hooks/counter-hook';
+import { useTimeout, useInterval } from '../hooks/timer-hooks';
 
 export type LoginHandler = {
   focus: (prop: string) => void;
