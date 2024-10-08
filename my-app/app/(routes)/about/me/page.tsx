@@ -7,7 +7,6 @@ export default function Me() {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
-  const urlSearchParams = new URLSearchParams(searchParams.toString());
 
   const goBack = () => {
     router.back();
@@ -16,6 +15,7 @@ export default function Me() {
   const goHello = () => router.push('/hello', { scroll: false });
 
   const changeSearchParams = (x: string) => {
+    const urlSearchParams = new URLSearchParams(searchParams.toString());
     urlSearchParams.set('xxx', x);
     console.log('🚀  urlSearchParams:', urlSearchParams.toString());
     router.push(`${pathname}?${urlSearchParams.toString()}`);
